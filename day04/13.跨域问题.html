@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<button id="btnGet">GET</button>
+		<button id="btnPost">POST</button>
+		<button id="btnDelete">DELETE</button>
+		<button id="btnJSONP">JSONP</button>
+
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+		<script>
+			$(function () {
+				$('#btnGet').on('click', function () {
+					$.ajax({
+						method: 'GET',
+						url: 'http://127.0.0.1/api/get',
+						data: { name: 'zs', age: 18 },
+						success(res) {
+							console.log(res);
+						}
+					});
+				});
+
+				$('#btnPost').on('click', function () {
+					$.ajax({
+						method: 'POST',
+						url: 'http://127.0.0.1/api/post',
+						data: { bookname: '斗罗大陆', author: '唐家三少' },
+						success(res) {
+							console.log(res);
+						}
+					});
+				});
+
+				$('#btnDelete').on('click', function () {
+					$.ajax({
+						method: 'DELETE',
+						url: 'http://127.0.0.1/api/delete',
+
+						success(res) {
+							console.log(res);
+						}
+					});
+				});
+
+				/* $('#btnJSONP').on('click', function () {
+					$.ajax({
+						method: 'GET',
+						url: 'http://127.0.0.1/api/jsonp',
+						dataType: 'jsonp',
+						success(res) {
+							console.log(res);
+						}
+					});
+				}); */
+			});
+		</script>
+		<script>
+			//通过 script 标签不受跨域限制,前端使用一个同名函数,就可以通过形参拿到数据
+			function fn(data) {
+				console.log(data);
+			}
+		</script>
+		<script src="http://127.0.0.1/api/jsonp?callback=fn"></script>
+	</body>
+</html>
